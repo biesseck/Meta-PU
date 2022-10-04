@@ -1,3 +1,13 @@
+# BERNARDO INSTRUCTIONS
+
+`conda install pytorch torchvision cudatoolkit=11.3 -c pytorch`
+
+`pip install -r requirements.txt`
+
+`python setup.py build_ext --inplace or: pip install -e .`
+
+_________
+
 # Meta-PU: An Arbitrary-Scale Upsampling Network for Point Cloud
 
 Point cloud upsampling is vital for the quality of the mesh in three-dimensional reconstruction. Recent research on point cloud upsampling has achieved great success due to the development of deep learning. However, the existing methods regard point cloud upsampling of different scale factors as independent tasks. Thus, the methods need to train a specific model for each scale factor, which is both inefficient and impractical for storage and computation in real applications. To address this limitation, in this work, we propose a novel method called ``Meta-PU" to firstly support point cloud upsampling of arbitrary scale factors with a single model. In the Meta-PU method, besides the backbone network consisting of residual graph convolution (RGC) blocks, a meta-subnetwork is learned to adjust the weights of the RGC blocks dynamically, and a farthest sampling block is adopted to sample different numbers of points. Together, these two blocks enable our Meta-PU to continuously upsample the point cloud with arbitrary scale factors by using only a single model. In addition, the experiments reveal that training on multiple scales simultaneously is beneficial to each other. Thus, Meta-PU even outperforms the existing methods trained for a specific scale factor only.
