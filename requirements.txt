@@ -4,7 +4,7 @@ h5py
 numpy
 torch>=1.0
 torchvision
-pprint
+# pprint   # original
 enum34
 future
 pykeops
