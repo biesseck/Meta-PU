@@ -4,7 +4,7 @@
 
 `pip install -r requirements.txt`
 
-`sudo $(which python) setup.py build_ext --inplace`
+`export CUDA_HOME=/usr/local/cuda-11.3 && sudo $(which python) setup.py build_ext --inplace`
 
 `sudo chown -R $(whoami) ./* && sudo chgrp -R $(whoami) ./*`
 
