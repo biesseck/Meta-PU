@@ -313,8 +313,12 @@ class QueryBallPoint(Function):
         # else:
         #     idx, pts_cnt = grouping_module.query_ball_point(
         #         xyz, new_xyz, radius, nsample)
-        idx, pts_cnt = _ext.ball_query(xyz, new_xyz, radius, nsample)
-        return idx, pts_cnt
+
+        # idx, pts_cnt = _ext.ball_query(xyz, new_xyz, radius, nsample)   # original
+        idx = _ext.ball_query(xyz, new_xyz, radius, nsample)              # BERNARDO
+
+        # return idx, pts_cnt  # original
+        return idx, idx
 
     @staticmethod
     def backward(ctx, a=None):
