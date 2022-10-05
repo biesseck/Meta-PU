@@ -11,3 +11,6 @@ pykeops
 geomloss
 ninja
 matplotlib
+lmdb
+msgpack_numpy
+pytorch_lightning
