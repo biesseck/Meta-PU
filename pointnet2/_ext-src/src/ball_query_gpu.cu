@@ -5,18 +5,16 @@
 #include "cuda_utils.h"
 
 // input: new_xyz(b, m, 3) xyz(b, n, 3)
-// output: idx(b, m, nsample), pts_cnt (b,m)
+// output: idx(b, m, nsample)
 __global__ void query_ball_point_kernel(int b, int n, int m, float radius,
                                         int nsample,
                                         const float *__restrict__ new_xyz,
                                         const float *__restrict__ xyz,
-                                        int *__restrict__ idx,
-                                        int *__restrict__ pts_cnt) {
+                                        int *__restrict__ idx) {
   int batch_index = blockIdx.x;
   xyz += batch_index * n * 3;
   new_xyz += batch_index * m * 3;
   idx += m * nsample * batch_index;
-  pts_cnt += m * batch_index; // counting how many unique points selected in local region
 
   int index = threadIdx.x;
   int stride = blockDim.x;
@@ -26,8 +24,7 @@ __global__ void query_ball_point_kernel(int b, int n, int m, float radius,
     float new_x = new_xyz[j * 3 + 0];
     float new_y = new_xyz[j * 3 + 1];
     float new_z = new_xyz[j * 3 + 2];
-    int cnt = 0;
-    for (int k = 0; k < n && cnt < nsample; ++k) {
+    for (int k = 0, cnt = 0; k < n && cnt < nsample; ++k) {
       float x = xyz[k * 3 + 0];
       float y = xyz[k * 3 + 1];
       float z = xyz[k * 3 + 2];
@@ -43,16 +40,15 @@ __global__ void query_ball_point_kernel(int b, int n, int m, float radius,
         ++cnt;
       }
     }
-  pts_cnt[j] = cnt;
   }
 }
 
 void query_ball_point_kernel_wrapper(int b, int n, int m, float radius,
                                      int nsample, const float *new_xyz,
-                                     const float *xyz, int *idx, int *pts_cnt) {
+                                     const float *xyz, int *idx) {
   cudaStream_t stream = at::cuda::getCurrentCUDAStream();
   query_ball_point_kernel<<<b, opt_n_threads(m), 0, stream>>>(
-      b, n, m, radius, nsample, new_xyz, xyz, idx, pts_cnt);
+      b, n, m, radius, nsample, new_xyz, xyz, idx);
 
   CUDA_CHECK_ERRORS();
 }
