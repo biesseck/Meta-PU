@@ -10,3 +10,4 @@ future
 pykeops
 geomloss
 ninja
+matplotlib
