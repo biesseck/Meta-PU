@@ -6,9 +6,11 @@
 
 `export CUDA_HOME=/usr/local/cuda-11.3 && sudo $(which python) setup.py build_ext --inplace`
 
+`# sudo $(which pip) install -e .`
+`sudo $(which pip) install -e . --target=/conda/anaconda3/envs/bjgbiesseck_Meta-PU_biesseck_python3.7/lib/python3.7/site-packages`
+
 `sudo chown -R $(whoami) ./* && sudo chgrp -R $(whoami) ./*`
 
-`pip install -e .`
 
 _________
 
