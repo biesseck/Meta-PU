@@ -39,7 +39,8 @@ _ext_headers = glob.glob("{}/include/*".format(_ext_src_root))
 out_cuda = get_pkg_config_include_lib_paths(lib_name=cuda_version)[0]
 
 # requirements = ["etw_pytorch_utils==1.1.1", "h5py", "pprint", "enum34", "future"]  # original
-requirements = ["etw_pytorch_utils==1.1.0", "h5py", "enum34", "future"]              # BERNARDO
+# requirements = ["etw_pytorch_utils==1.1.0", "h5py", "enum34", "future"]              # BERNARDO
+requirements = ["h5py", "enum34", "future"]                                            # BERNARDO
 
 setup(
     name="pointnet2",

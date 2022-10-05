@@ -9,3 +9,5 @@ model/__pycache__/
 
 *.swp
 *.pyc
+
+*.egg-info*
