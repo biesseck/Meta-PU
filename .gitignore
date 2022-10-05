@@ -4,6 +4,7 @@ build/
 model/new/
 model/newnew/
 model/__pycache__/
+model/data/*
 
 *.h5
 
