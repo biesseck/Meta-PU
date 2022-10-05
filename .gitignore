@@ -6,3 +6,6 @@ model/newnew/
 model/__pycache__/
 
 *.h5
+
+*.swp
+*.pyc
