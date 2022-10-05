@@ -4,7 +4,11 @@
 
 `pip install -r requirements.txt`
 
-`python setup.py build_ext --inplace or: pip install -e .`
+`sudo $(which python) setup.py build_ext --inplace`
+
+`sudo chown -R $(whoami) ./* && sudo chgrp -R $(whoami) ./*`
+
+`pip install -e .`
 
 _________
 
