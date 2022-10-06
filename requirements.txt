@@ -16,3 +16,4 @@ msgpack_numpy
 pytorch_lightning
 sklearn
 warmup_scheduler
+pyntcloud
