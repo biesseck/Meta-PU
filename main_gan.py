@@ -21,7 +21,7 @@ import torch
 import sys
 from torch.optim.lr_scheduler import StepLR, CosineAnnealingLR
 from warmup_scheduler import GradualWarmupScheduler
-
+from pyntcloud import PyntCloud
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--phase', default='test', help='train or test [default: test]')
@@ -287,7 +287,8 @@ def prediction_whole_model(use_normal=False, this_scale=4):
     if not os.path.exists(save_path):
         os.makedirs(save_path)
 
-    samples = glob(data_folder + "/*.xyz")
+    # samples = glob(data_folder + "/*.xyz")   # original
+    samples = glob(data_folder + "/*.obj")     # BERNARDO
     samples.sort(reverse=True)
     print('in',data_folder,'num of samples: ',len(samples))
 
@@ -323,7 +324,15 @@ def prediction_whole_model(use_normal=False, this_scale=4):
 
     total_time = 0
     for i, item in enumerate(samples):
-        input = np.loadtxt(item)
+        if item.endswith('.obj'):
+            point_cloud = PyntCloud.from_file(item)
+            input = point_cloud.points.to_numpy()
+            print('input:', input)
+            # print('my_point_cloud:', my_point_cloud)
+        else:
+            input = np.loadtxt(item)
+            # print('input:', input)
+
         input = np.expand_dims(input, axis=0)
         if not use_normal:
             input = input[:, :, 0:3]
